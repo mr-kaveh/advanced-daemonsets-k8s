@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config-gpu
+data:
+  fluent.conf: |
+    # Fluentd configuration for GPU-accelerated node group
+    # Add configuration specific to GPU metrics and logs
