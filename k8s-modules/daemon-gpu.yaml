@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-gpu
+spec:
+  selector:
+    matchLabels:
+      app: fluentd
+      node-group: gpu
+  template:
+    metadata:
+      labels:
+        app: fluentd
+        node-group: gpu
+    spec:
+      containers:
+      - name: fluentd
+        image: fluent/fluentd:v1.13-debian-1
+        resources:
+          limits:
+            memory: "300Mi"
+            cpu: "150m"
+          requests:
+            memory: "150Mi"
+            cpu: "75m"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /fluentd/etc
+      volumes:
+      - name: config-volume
+        configMap:
+          name: fluentd-config-gpu
