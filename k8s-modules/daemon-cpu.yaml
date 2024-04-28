@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd-cpu
+spec:
+  selector:
+    matchLabels:
+      app: fluentd
+      node-group: cpu
+  template:
+    metadata:
+      labels:
+        app: fluentd
+        node-group: cpu
+    spec:
+      containers:
+      - name: fluentd
+        image: fluent/fluentd:v1.13-debian-1
+        resources:
+          limits:
+            memory: "200Mi"
+            cpu: "200m"
+          requests:
+            memory: "100Mi"
+            cpu: "100m"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /fluentd/etc
+      volumes:
+      - name: config-volume
+        configMap:
+          name: fluentd-config-cpu
