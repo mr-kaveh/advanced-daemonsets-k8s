@@ -33,40 +33,40 @@ Here's an example implementation:
 
 
 
-	`apiVersion: v1
+	apiVersion: v1
 	kind: ConfigMap
 	metadata:
 	  name: fluentd-config-cpu
 	data:
 	  fluent.conf: |
 	    # Fluentd configuration for CPU-intensive node group
-	    # Add configuration specific to CPU metrics and logs` 
+	    # Add configuration specific to CPU metrics and logs
 
---------------------
+---
 
-	`apiVersion: v1
+	apiVersion: v1
 	kind: ConfigMap
 	metadata:
 	  name: fluentd-config-memory
 	data:
 	  fluent.conf: |
 	    # Fluentd configuration for memory-intensive node group
-	    # Add configuration specific to memory metrics and logs` 
+	    # Add configuration specific to memory metrics and logs
 
-------------------------
+---
 
-	`apiVersion: v1
+	apiVersion: v1
 	kind: ConfigMap
 	metadata:
 	  name: fluentd-config-gpu
 	data:
 	  fluent.conf: |
 	    # Fluentd configuration for GPU-accelerated node group
-	    # Add configuration specific to GPU metrics and logs` 
+	    # Add configuration specific to GPU metrics and logs
 
 **DaemonSets:**
 
-	`apiVersion: apps/v1
+	apiVersion: apps/v1
 	kind: DaemonSet
 	metadata:
 	  name: fluentd-cpu
@@ -97,11 +97,11 @@ Here's an example implementation:
 	      volumes:
 	      - name: config-volume
 	        configMap:
-	          name: fluentd-config-cpu` 
+	          name: fluentd-config-cpu
 
 ---
 
-	`apiVersion: apps/v1
+	apiVersion: apps/v1
 	kind: DaemonSet
 	metadata:
 	  name: fluentd-memory
@@ -132,11 +132,11 @@ Here's an example implementation:
 	      volumes:
 	      - name: config-volume
 	        configMap:
-	          name: fluentd-config-memory` 
+	          name: fluentd-config-memory
 
 ---
 
-	`apiVersion: apps/v1
+	apiVersion: apps/v1
 	kind: DaemonSet
 	metadata:
 	  name: fluentd-gpu
@@ -167,6 +167,6 @@ Here's an example implementation:
 	      volumes:
 	      - name: config-volume
 	        configMap:
-	          name: fluentd-config-gpu` 
+	          name: fluentd-config-gpu
 
 With this setup, Fluentd will be deployed as DaemonSets across different node groups with customized configurations and resource allocations tailored to each node group's characteristics. This approach enables efficient logging and monitoring tailored to the specific requirements of each workload type running in the Kubernetes cluster.
